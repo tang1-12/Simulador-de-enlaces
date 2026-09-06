@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BondSim – Simulador de Enlaces Químicos</title>
+  <meta name="description" content="Simulador interactivo de enlaces químicos. Determina si dos elementos forman un enlace iónico, metálico o covalente, e identifica el tipo de material semiconductor." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="bg-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="orb orb-4"></div>
+  </div>
+
+  <canvas id="particleCanvas"></canvas>
+
+  <div class="app-wrapper">
+    <header class="header">
+      <div class="header-logo">
+        <div class="logo-icon">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="14" cy="24" r="8" fill="url(#g1)" />
+            <circle cx="34" cy="24" r="8" fill="url(#g2)" />
+            <path d="M22 24 H26" stroke="white" stroke-width="2.5" stroke-linecap="round" />
+            <defs>
+              <radialGradient id="g1" cx="40%" cy="35%"><stop offset="0%" stop-color="#a78bfa"/><stop offset="100%" stop-color="#7c3aed"/></radialGradient>
+              <radialGradient id="g2" cx="40%" cy="35%"><stop offset="0%" stop-color="#38bdf8"/><stop offset="100%" stop-color="#0ea5e9"/></radialGradient>
+            </defs>
+          </svg>
+        </div>
+        <div>
+          <h1 class="logo-title">BondSim</h1>
+          <p class="logo-sub">Simulador de Enlaces Químicos</p>
+        </div>
+      </div>
+      <div class="header-badge">v2.0 · 118 elementos</div>
+    </header>
+
+    <main class="main">
+      <section class="input-section">
+        <div class="section-label">
+          <span class="section-dot"></span>
+          Ingresa dos elementos
+        </div>
+
+        <div class="elements-row">
+          <div class="element-card" id="card1">
+            <div class="element-card-label">Elemento 1</div>
+            <div class="element-input-wrap">
+              <input id="element1" type="text" placeholder="Símbolo, nombre o Z" autocomplete="off" spellcheck="false" />
+              <div class="input-hint">Ej: Si, Silicon, 14</div>
+            </div>
+            <div class="element-preview" id="preview1">
+              <div class="preview-empty">
+                <div class="preview-empty-icon">?</div>
+                <span>Sin elemento</span>
+              </div>
+            </div>
+            <div id="suggestions1" class="suggestions-list"></div>
+          </div>
+
+          <div class="bond-arrow">
+            <div class="arrow-line"></div>
+            <div class="arrow-center">+</div>
+            <div class="arrow-line"></div>
+          </div>
+
+          <div class="element-card" id="card2">
+            <div class="element-card-label">Elemento 2</div>
+            <div class="element-input-wrap">
+              <input id="element2" type="text" placeholder="Símbolo, nombre o Z" autocomplete="off" spellcheck="false" />
+              <div class="input-hint">Ej: Ge, Germanio, 32</div>
+            </div>
+            <div class="element-preview" id="preview2">
+              <div class="preview-empty">
+                <div class="preview-empty-icon">?</div>
+                <span>Sin elemento</span>
+              </div>
+            </div>
+            <div id="suggestions2" class="suggestions-list"></div>
+          </div>
+        </div>
+
+        <button class="analyze-btn" id="analyzeBtn" disabled>
+          <span class="btn-icon">⚗️</span>
+          Analizar Enlace
+          <span class="btn-shimmer"></span>
+        </button>
+      </section>
+
+      <section class="result-section" id="resultSection" style="display:none">
+        <div id="resultContent"></div>
+      </section>
+
+      <section class="info-section">
+        <h2 class="info-title">Tipos de Enlace</h2>
+        <div class="info-grid">
+          <div class="info-card ionic">
+            <div class="info-card-icon">⚡</div>
+            <h3>Iónico</h3>
+            <p>Metal + No metal. Transferencia de electrones. Diferencia de electronegatividad &gt; 1.7</p>
+          </div>
+          <div class="info-card metallic">
+            <div class="info-card-icon">🔗</div>
+            <h3>Metálico</h3>
+            <p>Metal + Metal. Nube de electrones deslocalizados. Alta conductividad eléctrica.</p>
+          </div>
+          <div class="info-card covalent">
+            <div class="info-card-icon">🔬</div>
+            <h3>Covalente</h3>
+            <p>No metal + No metal. Compartición de electrones. Genera materiales semiconductores.</p>
+          </div>
+          <div class="info-card semiconductor">
+            <div class="info-card-icon">💡</div>
+            <h3>Semiconductor</h3>
+            <p>Intrínseco (puro), Tipo N (grupo 15) o Tipo P (grupo 13).</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>BondSim · Basado en electronegatividades de Pauling y teoría de bandas</p>
+    </footer>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
